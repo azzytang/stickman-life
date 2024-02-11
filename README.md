@@ -2,9 +2,12 @@
 
 A fun rendition of the nostalgic Duck Life games.
 
+![Screenshot](readme_img.png)
+![Screenshot](readme_img2.png)
+
 ## Background
 
-I am currently a Sopohomore in HS, as of 2023, and created this game because I was inspired by the Duck Life series. I used to play Duck Life throughout my primary school years, and really enjoyed it. To relive some of the nostalgic years, I remade a version of it with a twist: instead of ducks racing and training, it would be stickmen.
+I am currently a Sophomore in HS, as of 2023, and created this game because I was inspired by the Duck Life series. I used to play Duck Life throughout my primary school years, and really enjoyed it. To relive some of the nostalgic years, I remade a version of it with a twist: instead of ducks racing and training, it would be stickmen.
 
 ## Key Features
 
