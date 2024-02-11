@@ -541,7 +541,7 @@ races_lose_rect = races_lose.get_rect(center=(450, 350))
 races_win = stickman_font.render('you won', True, 'black')
 races_win_rect = races_win.get_rect(center=(450, 350))
 
-title_screen = False
+title_screen = True
 introduction = False
 game_active = True
 stickman_pickup = False
@@ -551,7 +551,7 @@ swimming_training = False
 flying_training = False
 climbing_training = False
 last_training = 0
-home_screen = True
+home_screen = False
 training = False
 racing = False
 stats_screen = False
@@ -1204,12 +1204,17 @@ while True:
                 screen.blit(races_circle_selected, races_circle_rect5)
 
             screen.blit(races_trophy, races_trophy_rect)
-            
-            if current_race == 1: races_stickman_rect.x = 115
-            elif current_race == 2: races_stickman_rect.x = 238
-            elif current_race == 3: races_stickman_rect.x = 367
-            elif current_race == 4: races_stickman_rect.x = 480
-            elif current_race == 5: races_stickman_rect.x = 602
+
+            if current_race == 1:
+                races_stickman_rect.x = 115
+            elif current_race == 2:
+                races_stickman_rect.x = 238
+            elif current_race == 3:
+                races_stickman_rect.x = 367
+            elif current_race == 4:
+                races_stickman_rect.x = 480
+            elif current_race == 5:
+                races_stickman_rect.x = 602
 
             screen.blit(races_stickman, races_stickman_rect)
 
