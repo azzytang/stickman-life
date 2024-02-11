@@ -2,8 +2,8 @@
 
 A fun rendition of the nostalgic Duck Life games.
 
-![Screenshot](readme_img.png)
-![Screenshot](readme_img2.png)
+![Image](readme_img.png)
+![Image](readme_img2.png)
 
 ## Background
 
