@@ -3,6 +3,8 @@ import pygame
 from random import randint
 
 
+# TODO switch over to OOP for cleaner code, do when game mechanics are "finished" (still room for polishing)
+
 def display_score():
     current_time = pygame.time.get_ticks() - start_time
     score_surface = stickman_font.render(
@@ -26,6 +28,8 @@ def meat_movement(meat_list):
         return meat_list
     else:
         return []
+
+# TODO clean this up by adding param, that way there is one func for obstacle movement.
 
 
 def obstacle_movement(obstacle_list):
@@ -81,12 +85,32 @@ def obstacle_movement3(obstacle_list):
     return []
 
 
-def coin_movement(coin_list):
+def obstacle_movement4(obstacle_list):
+    if obstacle_list:
+        for obstacle_rect in obstacle_list:
+            obstacle_rect.x -= 3
+            if obstacle_rect.width > 200:
+                screen.blit(airplane, obstacle_rect)
+            else:
+                screen.blit(bird, obstacle_rect)
+
+        obstacle_list = [
+            obstacle for obstacle in obstacle_list if obstacle.y < 750]
+
+        return obstacle_list
+    return []
+
+
+def coin_movement(coin_list, distance, direction):
     if coin_list:
         for coin_rect in coin_list:
-            coin_rect.x -= 4
+            if direction == "W":
+                coin_rect.x -= distance
+            elif direction == "S":
+                coin_rect.y += distance
             screen.blit(coin, coin_rect)
-        coin_list = [coin for coin in coin_list if coin.x > -100]
+        coin_list = [coin for coin in coin_list if (
+            coin.x > -100 and direction == "W") or (coin.y < 900 and direction == "S")]
         return coin_list
     return []
 
@@ -155,6 +179,14 @@ def climbing_right_animation():
     if stickman_index >= 4 or stickman_index < 2:
         stickman_index = 2
     stickman_climbing_surf = stickman_climbing[int(stickman_index)]
+
+
+def running_animation():
+    global stickman_index, stickman_running_surf
+    stickman_index += .05
+    if stickman_index >= 2:
+        stickman_index = 0
+    stickman_running_surf = stickman_swimming[int(stickman_index)]
 
 
 pygame.init()
@@ -578,7 +610,10 @@ races_click = stickman_font.render('click to start', True, 'black')
 races_click = pygame.transform.rotozoom(races_click, 0, .3)
 races_click_rect = races_click.get_rect(topleft=(105, 460))
 # race 1
-
+stickman_right_run1 = pygame.image.load('').convert_alpha()
+stickman_right_run2 = pygame.image.load('').convert_alpha()
+stickman_running = [stickman_right_run1, stickman_right_run2]
+stickman_running_surf = stickman_running[stickman_index]
 # desc
 race1_desc1 = stickman_font.render(
     'race for noobs.', True, 'black')
@@ -596,7 +631,7 @@ races_lose_rect = races_lose.get_rect(center=(450, 350))
 races_win = stickman_font.render('you won', True, 'black')
 races_win_rect = races_win.get_rect(center=(450, 350))
 
-title_screen = True
+title_screen = False
 introduction = False
 game_active = True
 stickman_pickup = False
@@ -606,7 +641,7 @@ swimming_training = False
 flying_training = False
 climbing_training = False
 last_training = 0
-home_screen = False
+home_screen = True
 training = False
 racing = False
 stats_screen = False
@@ -635,6 +670,9 @@ pygame.time.set_timer(obstacle_timer2, 2000)
 
 obstacle_timer3 = pygame.USEREVENT + 4
 pygame.time.set_timer(obstacle_timer3, 1500)
+
+obstacle_timer4 = pygame.USEREVENT + 5
+pygame.time.set_timer(obstacle_timer4, 2000)
 
 coin_timer = pygame.USEREVENT + 2
 pygame.time.set_timer(coin_timer, 2000)
@@ -750,6 +788,8 @@ while True:
                     racing, home_screen = False, True
                     race1, race2, race3, race4, race5 = False, False, False, False, False
                 if races_circle_rect1.collidepoint(mouse_pos) and current_race == 1:
+                    stickman_right_rect.x = 100
+                    stickman_right_rect.y = 500
                     race1 = True
                     start_time = pygame.time.get_ticks()
                 if races_circle_rect2.collidepoint(mouse_pos) and current_race == 2:
@@ -799,6 +839,15 @@ while True:
                 else:
                     obstacle_list.append(spike2.get_rect(
                         topleft=(538, randint(-100, -50))))
+        if event.type == obstacle_timer4:
+            if flying_training:
+                if randint(0, 1):
+                    obstacle_list.append(bird.get_rect(
+                        topleft=(randint(900, 1000), randint(100, 600))))
+                else:
+                    obstacle_list.append(airplane.get_rect(
+                        topleft=(randint(900, 1000), randint(100, 600))))
+
         if event.type == coin_timer:
             if running_training:
                 coin_list.append(coin.get_rect(
@@ -806,6 +855,12 @@ while True:
             elif swimming_training:
                 coin_list.append(coin.get_rect(
                     center=(randint(1100, 1300), randint(550, 700))))
+            elif flying_training:
+                coin_list.append(coin.get_rect(
+                    center=(randint(900, 1000), randint(100, 600))))
+            elif climbing_training:
+                coin_list.append(coin.get_rect(
+                    center=(randint(300, 600), randint(-150, -50))))
 
     if title_screen:
         screen.fill('white')
@@ -1068,7 +1123,7 @@ while True:
             if hills_running2_rect.x < -900:
                 hills_running2_rect.x = 900
 
-            coin_list = coin_movement(coin_list)
+            coin_list = coin_movement(coin_list, 4, "W")
             if not coins_collisions(stickman_right_rect, coin_list):
                 coins += 1
 
@@ -1119,7 +1174,7 @@ while True:
                 ocean_floor_rect2.x = 902
             screen.blit(ocean_floor, ocean_floor_rect1)
             screen.blit(ocean_floor, ocean_floor_rect2)
-            coin_list = coin_movement(coin_list)
+            coin_list = coin_movement(coin_list, 4, "W")
             if not coins_collisions(stickman_swimming_rect, coin_list):
                 coins += 1
             swimming_animation()
@@ -1144,8 +1199,6 @@ while True:
             score = display_score()
             screen.blit(clouds, clouds_rect1)
             screen.blit(clouds, clouds_rect2)
-            screen.blit(airplane, airplane_rect)
-            screen.blit(bird, bird_rect)
             clouds_rect1.x -= 3
             clouds_rect2.x -= 3
             if clouds_rect1.x < -1850:
@@ -1153,6 +1206,9 @@ while True:
             if clouds_rect2.x < -1850:
                 clouds_rect2.x = randint(900, 1000)
             flying_animation()
+            coin_list = coin_movement(coin_list, 3, "W")
+            if not coins_collisions(stickman_flying_rect, coin_list):
+                coins += 1
             screen.blit(stickman_flying_surf, stickman_flying_rect)
             if keys[pygame.K_w] and stickman_flying_rect.y > 20:
                 stickman_flying_rect.y -= 3
@@ -1162,6 +1218,12 @@ while True:
                 stickman_flying_rect.x -= 3
             if keys[pygame.K_d] and stickman_flying_rect.x < 700:
                 stickman_flying_rect.x += 3
+            obstacle_list = obstacle_movement4(obstacle_list)
+            if not collisions(stickman_flying_rect, obstacle_list):
+                flying_lvl += score/(5*(flying_lvl+1))
+                training_over = True
+                flying_training = False
+                last_training = 2
 
         if climbing_training:
             keys = pygame.key.get_pressed()
@@ -1191,6 +1253,11 @@ while True:
                 if stickman_climbing_rect.x > 300:
                     stickman_climbing_rect.x -= 10
                     stickman_climbing_rect.y -= 2
+
+            coin_list = coin_movement(coin_list, 4, "S")
+            if not coins_collisions(stickman_climbing_rect, coin_list):
+                coins += 1
+
             if stickman_climbing_rect.x <= 300 or stickman_climbing_rect.x >= 550:
                 if keys[pygame.K_w] and stickman_climbing_rect.y > 20:
                     stickman_climbing_rect.y -= 3
@@ -1230,6 +1297,7 @@ while True:
             if retry_button_rect.collidepoint(mouse_pos):
                 screen.blit(retry_button_selected,
                             retry_button_selected_rect)
+
         if racing:
             screen.fill('white')
             screen.blit(races_text, races_text_rect)
@@ -1283,6 +1351,7 @@ while True:
                 screen.blit(hills_running, hills_running_rect)
                 screen.blit(hills_running2, hills_running2_rect)
                 screen.blit(ground, ground_rect)
+                screen.blit(stickman_right, stickman_right_rect)
 
                 if countdown > 3:
 
