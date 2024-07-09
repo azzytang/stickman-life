@@ -164,7 +164,7 @@ pygame.display.set_caption("Stickman Life")
 stickman_font = pygame.font.Font('Stickman-Regular.ttf', 75)
 
 # MOUSE CURSOR
-mouse_cursor = pygame.image.load('mouse_cursor.png').convert_alpha()
+mouse_cursor = pygame.image.load('./images/mouse_cursor.png').convert_alpha()
 mouse_cursor_rect = mouse_cursor.get_rect(center=(0, 0))
 
 
@@ -174,11 +174,13 @@ title_rect = title.get_rect(center=(450, 400))
 play_text = stickman_font.render("play", True, 'black')
 play_text = pygame.transform.rotozoom(play_text, 0, .5)
 play_text_rect = play_text.get_rect(center=(450, 500))
-titlehead = pygame.image.load('titlehead.png').convert_alpha()
+titlehead = pygame.image.load('./images/intro/titlehead.png').convert_alpha()
 titlehead_rect = titlehead.get_rect(center=(450, 200))
-play_button = pygame.image.load('play_button.png').convert_alpha()
+play_button = pygame.image.load(
+    './images/intro/play_button.png').convert_alpha()
 play_button_rect = play_button.get_rect(center=(450, 500))
-play_buttondown = pygame.image.load('play_buttondown.png').convert_alpha()
+play_buttondown = pygame.image.load(
+    './images/intro/play_buttondown.png').convert_alpha()
 play_buttondown_rect = play_buttondown.get_rect(center=(450, 500))
 
 
@@ -191,120 +193,144 @@ intro1_surface = stickman_font.render(
     "you were once a successful farmer..", True, 'black')
 intro1_surface = pygame.transform.rotozoom(intro1_surface, 0, .5)
 intro1_rect = intro1_surface.get_rect(center=(450, 550))
-intro1_scene = pygame.image.load('intro1_scene.png').convert_alpha()
+intro1_scene = pygame.image.load(
+    './images/intro/intro1_scene.png').convert_alpha()
 intro1_scene_rect = intro1_scene.get_rect(center=(450, 275))
 
 intro2_surface = stickman_font.render(
     "but a tornado came and destroyed everything.", True, 'black')
 intro2_surface = pygame.transform.rotozoom(intro2_surface, 0, .5)
 intro2_rect = intro2_surface.get_rect(center=(450, 550))
-intro2_scene = pygame.image.load('intro2_scene.png').convert_alpha()
+intro2_scene = pygame.image.load(
+    './images/intro/intro2_scene.png').convert_alpha()
 intro2_scene_rect = intro2_scene.get_rect(center=(450, 275))
 
 intro3_surface = stickman_font.render(
     "the only thing left was a mysterious egg", True, 'black')
 intro3_surface = pygame.transform.rotozoom(intro3_surface, 0, .5)
 intro3_rect = intro3_surface.get_rect(center=(450, 550))
-intro3_scene = pygame.image.load('intro3_scene.png').convert_alpha()
+intro3_scene = pygame.image.load(
+    './images/intro/intro3_scene.png').convert_alpha()
 intro3_scene_rect = intro3_scene.get_rect(center=(450, 275))
 
 intro4_surface = stickman_font.render(
     "which hatched into a stickman!", True, 'black')
 intro4_surface = pygame.transform.rotozoom(intro4_surface, 0, .5)
 intro4_rect = intro4_surface.get_rect(center=(450, 550))
-intro4_scene = pygame.image.load('intro4_scene.png').convert_alpha()
+intro4_scene = pygame.image.load(
+    './images/intro/intro4_scene.png').convert_alpha()
 intro4_scene_rect = intro4_scene.get_rect(center=(450, 275))
 
 intro5_surface = stickman_font.render(
     "now you must train this stickman and race others", True, 'black')
 intro5_surface = pygame.transform.rotozoom(intro5_surface, 0, .5)
 intro5_rect = intro5_surface.get_rect(center=(450, 550))
-intro5_scene = pygame.image.load('intro5_scene.png').convert_alpha()
+intro5_scene = pygame.image.load(
+    './images/intro/intro5_scene.png').convert_alpha()
 intro5_scene_rect = intro5_scene.get_rect(center=(450, 275))
 
 intro6_surface = stickman_font.render(
     "so you can earn money and rebuild the farm!", True, 'black')
 intro6_surface = pygame.transform.rotozoom(intro6_surface, 0, .5)
 intro6_rect = intro6_surface.get_rect(center=(450, 550))
-intro6_scene = pygame.image.load('intro6_scene.png').convert_alpha()
+intro6_scene = pygame.image.load(
+    './images/intro/intro6_scene.png').convert_alpha()
 intro6_scene_rect = intro6_scene.get_rect(center=(450, 275))
 
 
 # BACKGROUND
-sky = pygame.image.load('sky.png').convert_alpha()
+sky = pygame.image.load('./images/sky.png').convert_alpha()
 sky_rect = sky.get_rect(topleft=(0, 0))
-ground = pygame.image.load('ground.png').convert_alpha()
+ground = pygame.image.load('./images/ground.png').convert_alpha()
 ground_rect = ground.get_rect(topleft=(0, 0))
-hills = pygame.image.load('hills.png').convert_alpha()
+hills = pygame.image.load('./images/hills.png').convert_alpha()
 hills_rect = hills.get_rect(topleft=(0, 0))
-hills_running = pygame.image.load('running_hills.png').convert_alpha()
+hills_running = pygame.image.load(
+    './images/training/running/running_hills.png').convert_alpha()
 hills_running_rect = hills_running.get_rect(topleft=(-20, 0))
-hills_running2 = pygame.image.load('running_hills2.png').convert_alpha()
+hills_running2 = pygame.image.load(
+    './images/training/running/running_hills2.png').convert_alpha()
 hills_running2_rect = hills_running2.get_rect(topleft=(900, 0))
 
 
 # PROPS
-racing_banner = pygame.image.load('racing_banner.png').convert_alpha()
+racing_banner = pygame.image.load(
+    './images/home/racing_banner.png').convert_alpha()
 racing_banner_rect = racing_banner.get_rect(center=(750, 460))
 racing_banner_selected = pygame.image.load(
-    'racing_banner_selected.png').convert_alpha()
+    './images/home/racing_banner_selected.png').convert_alpha()
 racing_banner_selected_rect = racing_banner_selected.get_rect(
     center=(750, 460))
-gym = pygame.image.load('gym.png').convert_alpha()
+gym = pygame.image.load('./images/home/gym.png').convert_alpha()
 gym_rect = gym.get_rect(center=(100, 490))
-gym_selected = pygame.image.load('gym_selected.png').convert_alpha()
+gym_selected = pygame.image.load(
+    './images/home/gym_selected.png').convert_alpha()
 gym_selected_rect = gym_selected.get_rect(center=(100, 490))
 
-coin_logo = pygame.image.load('coin.png').convert_alpha()
+coin_logo = pygame.image.load('./images/home/coin.png').convert_alpha()
 coin_logo_rect = coin_logo.get_rect(topleft=(10, 10))
 
-coin = pygame.image.load('coin2.png').convert_alpha()
+coin = pygame.image.load('./images/training/coin2.png').convert_alpha()
 
-meat_stand = pygame.image.load('mysterymeat_stand.png').convert_alpha()
+meat_stand = pygame.image.load(
+    './images/home/mysterymeat_stand.png').convert_alpha()
 meat_stand_rect = meat_stand.get_rect(topleft=(200, 460))
 meat_stand_selected = pygame.image.load(
-    'mysterymeat_stand_selected.png').convert_alpha()
+    './images/home/mysterymeat_stand_selected.png').convert_alpha()
 meat_stand_selected_rect = meat_stand_selected.get_rect(topleft=(200, 460))
 meat_buy_text = stickman_font.render("buy meat? ($15)", True, 'black')
 meat_buy_text = pygame.transform.rotozoom(meat_buy_text, 0, .3)
 meat_buy_text_rect = meat_buy_text.get_rect(center=(290, 440))
-meat = pygame.image.load('mystery_meat.png').convert_alpha()
+meat = pygame.image.load('./images/home/mystery_meat.png').convert_alpha()
 meat = pygame.transform.rotozoom(meat, 0, .5)
 
 
 # PLAYER
-stickman_left = pygame.image.load('player copy.png').convert_alpha()
+stickman_left = pygame.image.load(
+    './images/stickman/player copy.png').convert_alpha()
 stickman_rect = stickman_left.get_rect(topleft=(450, 500))
-stickman_left_open = pygame.image.load('player_left_open.png').convert_alpha()
+stickman_left_open = pygame.image.load(
+    './images/stickman/player_left_open.png').convert_alpha()
 stickman_open_rect = stickman_left_open.get_rect(topleft=(450, 500))
-stickman_left2 = pygame.image.load('player_left_idle2.png').convert_alpha()
+stickman_left2 = pygame.image.load(
+    './images/stickman/player_left_idle2.png').convert_alpha()
 stickman_left_idle = [stickman_left, stickman_left2]
 stickman_index = 0
 stickman_surf = stickman_left_idle[stickman_index]
 
-stickman_right = pygame.image.load('player1 copy.png').convert_alpha()
+stickman_right = pygame.image.load(
+    './images/stickman/player1 copy.png').convert_alpha()
 stickman_right_rect = stickman_right.get_rect(topleft=(150, 500))
 stickman_right_open = pygame.image.load(
-    'player_right_open.png').convert_alpha()
-stickman_right2 = pygame.image.load('player_right_idle2.png').convert_alpha()
+    './images/stickman/player_right_open.png').convert_alpha()
+stickman_right2 = pygame.image.load(
+    './images/stickman/player_right_idle2.png').convert_alpha()
 stickman_right_idle = [stickman_right, stickman_right2]
 
-stickman_swimming1 = pygame.image.load('player_swim1.png').convert_alpha()
-stickman_swimming2 = pygame.image.load('player_swim2.png').convert_alpha()
+stickman_swimming1 = pygame.image.load(
+    './images/stickman/player_swim1.png').convert_alpha()
+stickman_swimming2 = pygame.image.load(
+    './images/stickman/player_swim2.png').convert_alpha()
 stickman_swimming = [stickman_swimming1, stickman_swimming2]
 stickman_swimming_surf = stickman_swimming[stickman_index]
 stickman_swimming_rect = stickman_swimming1.get_rect(topleft=(100, 550))
 
-stickman_flying1 = pygame.image.load('player_fly1.png').convert_alpha()
-stickman_flying2 = pygame.image.load('player_fly2.png').convert_alpha()
+stickman_flying1 = pygame.image.load(
+    './images/stickman/player_fly1.png').convert_alpha()
+stickman_flying2 = pygame.image.load(
+    './images/stickman/player_fly2.png').convert_alpha()
 stickman_flying_rect = stickman_flying1.get_rect(topleft=(300, 400))
 stickman_flying = [stickman_flying1, stickman_flying2]
 stickman_flying_surf = stickman_flying[stickman_index]
 
-stickman_climbing1 = pygame.image.load('player_climb1.png').convert_alpha()
-stickman_climbing2 = pygame.image.load('player_climb2.png').convert_alpha()
-stickman_climbing3 = pygame.image.load('player_climb3.png').convert_alpha()
-stickman_climbing4 = pygame.image.load('player_climb4.png').convert_alpha()
+stickman_climbing1 = pygame.image.load(
+    './images/stickman/player_climb1.png').convert_alpha()
+stickman_climbing2 = pygame.image.load(
+    './images/stickman/player_climb2.png').convert_alpha()
+stickman_climbing3 = pygame.image.load(
+    './images/stickman/player_climb3.png').convert_alpha()
+stickman_climbing4 = pygame.image.load(
+    './images/stickman/player_climb4.png').convert_alpha()
 stickman_climbing_rect = stickman_climbing1.get_rect(topleft=(300, 400))
 stickman_climbing = [stickman_climbing1, stickman_climbing2,
                      stickman_climbing3, stickman_climbing4]
@@ -331,22 +357,29 @@ back_button_selected = pygame.transform.rotozoom(back_button_selected, 0, .7)
 back_button_selected_rect = back_button_selected.get_rect(bottomleft=(50, 670))
 
 # running
-running_button = pygame.image.load('training_button.png').convert_alpha()
+running_button = pygame.image.load(
+    './images/training/training_button.png').convert_alpha()
 running_button_rect = running_button.get_rect(center=(650, 200))
 running_button_selected = pygame.image.load(
-    'training_button_selected.png').convert_alpha()
+    './images/training/training_button_selected.png').convert_alpha()
 running_button_selected_rect = running_button_selected.get_rect(
     center=(650, 200))
 running_text = stickman_font.render("running", True, 'black')
 running_text = pygame.transform.rotozoom(running_text, 0, .7)
 running_text_rect = running_text.get_rect(center=(650, 200))
 # obstacles
-smiley_ball = pygame.image.load('smiley_ball.png').convert_alpha()
-smiley_face = pygame.image.load('smiley.png').convert_alpha()
-sad_ball = pygame.image.load('sad_ball.png').convert_alpha()
-sad_face = pygame.image.load('sad_face.png').convert_alpha()
-purple_ball = pygame.image.load('purple_ball.png').convert_alpha()
-straight_face = pygame.image.load('straight_face.png').convert_alpha()
+smiley_ball = pygame.image.load(
+    './images/training/running/smiley_ball.png').convert_alpha()
+smiley_face = pygame.image.load(
+    './images/training/running/smiley.png').convert_alpha()
+sad_ball = pygame.image.load(
+    './images/training/running/sad_ball.png').convert_alpha()
+sad_face = pygame.image.load(
+    './images/training/running/sad_face.png').convert_alpha()
+purple_ball = pygame.image.load(
+    './images/training/running/purple_ball.png').convert_alpha()
+straight_face = pygame.image.load(
+    './images/training/running/straight_face.png').convert_alpha()
 # desc
 running_desc1 = stickman_font.render(
     "increase your running", True, 'black')
@@ -366,10 +399,11 @@ running_desc4 = pygame.transform.rotozoom(running_desc4, 0, .5)
 running_desc4_rect = running_desc4.get_rect(topleft=(75, 380))
 
 # swimming
-swimming_button = pygame.image.load('training_button.png').convert_alpha()
+swimming_button = pygame.image.load(
+    './images/training/training_button.png').convert_alpha()
 swimming_button_rect = swimming_button.get_rect(center=(650, 325))
 swimming_button_selected = pygame.image.load(
-    'training_button_selected.png').convert_alpha()
+    './images/training/training_button_selected.png').convert_alpha()
 swimming_button_selected_rect = swimming_button_selected.get_rect(
     center=(650, 325))
 swimming_text = stickman_font.render("swimming", True, 'black')
@@ -385,26 +419,32 @@ swimming_desc2 = stickman_font.render(
 swimming_desc2 = pygame.transform.rotozoom(swimming_desc2, 0, .5)
 swimming_desc2_rect = swimming_desc2.get_rect(topleft=(75, 240))
 # background
-ocean = pygame.image.load('ocean.png').convert_alpha()
-ocean_floor = pygame.image.load('ocean_floor.png').convert_alpha()
-ocean_background = pygame.image.load('ocean_background.png').convert_alpha()
+ocean = pygame.image.load(
+    './images/training/swimming/ocean.png').convert_alpha()
+ocean_floor = pygame.image.load(
+    './images/training/swimming/ocean_floor.png').convert_alpha()
+ocean_background = pygame.image.load(
+    './images/training/swimming/ocean_background.png').convert_alpha()
 ocean_rect = ocean.get_rect(topleft=(0, 441))
 ocean_floor_rect1 = ocean_floor.get_rect(topleft=(0, 441))
 ocean_floor_rect2 = ocean_floor.get_rect(topleft=(902, 441))
 ocean_background_rect = ocean_background.get_rect(topleft=(0, 441))
 # obstacles
-glacier = pygame.image.load('glacier.png').convert_alpha()
+glacier = pygame.image.load(
+    './images/training/swimming/glacier.png').convert_alpha()
 glacier_rect = glacier.get_rect(topleft=(450, 390))
-boat = pygame.image.load('boat.png').convert_alpha()
+boat = pygame.image.load('./images/training/swimming/boat.png').convert_alpha()
 boat_rect = boat.get_rect(topleft=(450, 375))
-shark = pygame.image.load('shark.png').convert_alpha()
+shark = pygame.image.load(
+    './images/training/swimming/shark.png').convert_alpha()
 shark_rect = shark.get_rect(topleft=(300, 450))
 
 # flying
-flying_button = pygame.image.load('training_button.png').convert_alpha()
+flying_button = pygame.image.load(
+    './images/training/training_button.png').convert_alpha()
 flying_button_rect = flying_button.get_rect(center=(650, 450))
 flying_button_selected = pygame.image.load(
-    'training_button_selected.png').convert_alpha()
+    './images/training/training_button_selected.png').convert_alpha()
 flying_button_selected_rect = flying_button_selected.get_rect(
     center=(650, 450))
 flying_text = stickman_font.render("flying", True, 'black')
@@ -420,17 +460,26 @@ flying_desc2 = stickman_font.render(
 flying_desc2 = pygame.transform.rotozoom(flying_desc2, 0, .5)
 flying_desc2_rect = flying_desc2.get_rect(topleft=(75, 240))
 # background
-flying_background = pygame.image.load('flying_background.png').convert_alpha()
+flying_background = pygame.image.load(
+    './images/training/flying/flying_background.png').convert_alpha()
 flying_background_rect = flying_background.get_rect(topleft=(0, 0))
-clouds = pygame.image.load('clouds.png').convert_alpha()
+clouds = pygame.image.load(
+    './images/training/flying/clouds.png').convert_alpha()
 clouds_rect1 = clouds.get_rect(topleft=(0, 0))
 clouds_rect2 = clouds.get_rect(topleft=(900, 0))
+# obstacles
+airplane = pygame.image.load(
+    './images/training/flying/airplane.png').convert_alpha()
+airplane_rect = airplane.get_rect()
+bird = pygame.image.load('./images/training/flying/bird.png').convert_alpha()
+bird_rect = bird.get_rect()
 
 # climbing
-climbing_button = pygame.image.load('training_button.png').convert_alpha()
+climbing_button = pygame.image.load(
+    './images/training/training_button.png').convert_alpha()
 climbing_button_rect = climbing_button.get_rect(center=(650, 575))
 climbing_button_selected = pygame.image.load(
-    'training_button_selected.png').convert_alpha()
+    './images/training/training_button_selected.png').convert_alpha()
 climbing_button_selected_rect = climbing_button_selected.get_rect(
     center=(650, 575))
 climbing_text = stickman_font.render("climbing", True, 'black')
@@ -447,21 +496,25 @@ climbing_desc2 = pygame.transform.rotozoom(climbing_desc2, 0, .5)
 climbing_desc2_rect = climbing_desc2.get_rect(topleft=(75, 240))
 # background
 climbing_background1 = pygame.image.load(
-    'climbing_background1.png').convert_alpha()
+    './images/training/climbing/climbing_background1.png').convert_alpha()
 climbing_background2 = pygame.image.load(
-    'climbing_background2.png').convert_alpha()
+    './images/training/climbing/climbing_background2.png').convert_alpha()
 climbing_background3 = pygame.image.load(
-    'climbing_background3.png').convert_alpha()
-climbing_walls = pygame.image.load('climbing_walls.png').convert_alpha()
-blue_background = pygame.image.load('blue_background.png').convert_alpha()
+    './images/training/climbing/climbing_background3.png').convert_alpha()
+climbing_walls = pygame.image.load(
+    './images/training/climbing/climbing_walls.png').convert_alpha()
+blue_background = pygame.image.load(
+    './images/blue_background.png').convert_alpha()
 climbing_background1_rect = climbing_background1.get_rect(topleft=(0, 0))
 climbing_background2_rect = climbing_background2.get_rect(topleft=(0, -700))
 climbing_background3_rect = climbing_background3.get_rect(topleft=(0, -1400))
 climbing_walls_rect = climbing_walls.get_rect(topleft=(0, 0))
 blue_background_rect = blue_background.get_rect(topleft=(0, 0))
 # obstacles
-spike1 = pygame.image.load('spike.png').convert_alpha()
-spike2 = pygame.image.load('spike2.png').convert_alpha()
+spike1 = pygame.image.load(
+    './images/training/climbing/spike.png').convert_alpha()
+spike2 = pygame.image.load(
+    './images/training/climbing/spike2.png').convert_alpha()
 
 # TRAINING RESULTS
 training_results_title = stickman_font.render(
@@ -488,10 +541,10 @@ retry_button_selected_rect = retry_button_selected.get_rect(
     bottomright=(850, 670))
 
 # STATS MENU
-stats_button = pygame.image.load('trophy.png').convert_alpha()
+stats_button = pygame.image.load('./images/home/trophy.png').convert_alpha()
 stats_button_rect = stats_button.get_rect(topleft=(840, 10))
 stats_button_selected = pygame.image.load(
-    'trophy_selected.png').convert_alpha()
+    './images/home/trophy_selected.png').convert_alpha()
 stats_button_selected_rect = stats_button_selected.get_rect(topleft=(840, 10))
 stats_title = stickman_font.render('stats', True, 'black')
 stats_text = pygame.transform.rotozoom(stats_title, 0, .3)
@@ -505,17 +558,19 @@ climbing_bar_rect = pygame.Rect(475, 450, 300, 50)
 # RACING MENU
 races_text = stickman_font.render('races', True, 'black')
 races_text_rect = races_text.get_rect(center=(450, 75))
-races_map = pygame.image.load('races_map.png').convert_alpha()
+races_map = pygame.image.load('./images/racing/races_map.png').convert_alpha()
 races_map_rect = races_map.get_rect(topleft=(0, 0))
-races_circle = pygame.image.load('races_circle.png').convert_alpha()
+races_circle = pygame.image.load(
+    './images/racing/races_circle.png').convert_alpha()
 races_circle_rect1 = races_circle.get_rect(center=(129, 426))
 races_circle_rect2 = races_circle.get_rect(center=(252, 375))
 races_circle_rect3 = races_circle.get_rect(center=(381, 413))
 races_circle_rect4 = races_circle.get_rect(center=(494, 327))
 races_circle_rect5 = races_circle.get_rect(center=(616, 377))
 races_circle_selected = pygame.image.load(
-    'races_circle_selected.png').convert_alpha()
-races_trophy = pygame.image.load('races_trophy.png').convert_alpha()
+    './images/racing/races_circle_selected.png').convert_alpha()
+races_trophy = pygame.image.load(
+    './images/racing/races_trophy.png').convert_alpha()
 races_trophy_rect = races_trophy.get_rect(center=(714, 321))
 races_stickman = pygame.transform.rotozoom(stickman_right, 0, .7)
 races_stickman_rect = races_stickman.get_rect(bottomleft=(115, 426))
@@ -571,7 +626,7 @@ coins = 0
 running_lvl, climbing_lvl, flying_lvl, swimming_lvl = 0, 0, 0, 0
 climb_right = False
 race1, race2, race3, race4, race5 = False, False, False, False, False
-current_race = 2
+current_race = 1
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, 1200)
 
@@ -1089,6 +1144,8 @@ while True:
             score = display_score()
             screen.blit(clouds, clouds_rect1)
             screen.blit(clouds, clouds_rect2)
+            screen.blit(airplane, airplane_rect)
+            screen.blit(bird, bird_rect)
             clouds_rect1.x -= 3
             clouds_rect2.x -= 3
             if clouds_rect1.x < -1850:
