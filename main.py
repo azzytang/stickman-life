@@ -188,6 +188,24 @@ def running_animation():
         stickman_index = 0
     stickman_running_surf = stickman_running[int(stickman_index)]
 
+
+def opp_racing_animation():
+    global opp1_index, opp2_index, opp3_index, opp1_surf, opp2_surf, opp3_surf
+    opp1_index += .03
+    opp2_index += .07
+    opp3_index += .1
+    if opp1_index >= 2:
+        opp1_index = 0
+    if opp2_index >= 2:
+        opp2_index = 0
+    if opp3_index >= 2:
+        opp3_index = 0
+
+    opp1_surf = opp1_list[int(opp1_index)]
+    opp2_surf = opp2_list[int(opp2_index)]
+    opp3_surf = opp3_list[int(opp3_index)]
+
+
 # def running_animation2():
 #     global stickman_index, stickman_running_surf
 #     stickman_index += .05
@@ -200,8 +218,6 @@ def running_animation():
 #     if stickman_index >= 2:
 #         stickman_index = 0
 #     stickman_running_surf = stickman_running[int(stickman_index)]
-
-
 pygame.init()
 screen = pygame.display.set_mode((900, 700))
 clock = pygame.time.Clock()
@@ -622,16 +638,55 @@ races_stickman_rect = races_stickman.get_rect(bottomleft=(115, 426))
 races_click = stickman_font.render('click to start', True, 'black')
 races_click = pygame.transform.rotozoom(races_click, 0, .3)
 races_click_rect = races_click.get_rect(topleft=(105, 460))
+
+skip_text = stickman_font.render('skip', True, 'black')
+skip_text = pygame.transform.rotozoom(skip_text, 0, .35)
+skip_text_selected = stickman_font.render('skip', True, 'gray51')
+skip_text_selected = pygame.transform.rotozoom(skip_text_selected, 0, .35)
+
+skip_text_selected_rect = skip_text_selected.get_rect(topleft=(50, 650))
+
+skip_text_rect = skip_text.get_rect(topleft=(50, 650))
+
 # racing opps
+
+opp1_index = 0
+opp2_index = 0
+opp3_index = 0
+
 opp1_idle = pygame.image.load(
     './images/stickman/opp1_idle.png').convert_alpha()
+opp1_run1 = pygame.image.load(
+    './images/stickman/opp1_run1.png').convert_alpha()
+opp1_run2 = pygame.image.load(
+    './images/stickman/opp1_run2.png').convert_alpha()
 opp2_idle = pygame.image.load(
     './images/stickman/opp2_idle.png').convert_alpha()
+opp2_run1 = pygame.image.load(
+    './images/stickman/opp2_run1.png').convert_alpha()
+opp2_run2 = pygame.image.load(
+    './images/stickman/opp2_run2.png').convert_alpha()
 opp3_idle = pygame.image.load(
     './images/stickman/opp3_idle.png').convert_alpha()
-opp1_idle_rect = opp1_idle.get_rect(topleft=(500, 500))
-opp2_idle_rect = opp2_idle.get_rect(topleft=(200, 500))
-opp3_idle_rect = opp3_idle.get_rect(topleft=(700, 500))
+opp3_run1 = pygame.image.load(
+    './images/stickman/opp3_run1.png').convert_alpha()
+opp3_run2 = pygame.image.load(
+    './images/stickman/opp3_run2.png').convert_alpha()
+
+opp1_idle_rect = opp1_idle.get_rect(topleft=(100, 480))
+opp2_idle_rect = opp2_idle.get_rect(topleft=(100, 460))
+opp3_idle_rect = opp3_idle.get_rect(topleft=(100, 440))
+opp1_pos = opp1_idle_rect.x
+opp2_pos = opp2_idle_rect.x
+opp3_pos = opp3_idle_rect.x
+
+opp1_surf = opp1_idle
+opp2_surf = opp2_idle
+opp3_surf = opp3_idle
+
+opp1_list = [opp1_run1, opp1_run2]
+opp2_list = [opp2_run1, opp2_run2]
+opp3_list = [opp3_run1, opp3_run2]
 
 # race 1
 stickman_right_run1 = pygame.image.load(
@@ -677,6 +732,7 @@ money = 50
 meat_list = []
 obstacle_list = []
 coin_list = []
+# max en start 10
 max_energy = 10
 energy = max_energy
 left, right = True, False
@@ -686,6 +742,7 @@ coins = 0
 running_lvl, climbing_lvl, flying_lvl, swimming_lvl = 0, 0, 0, 0
 climb_right = False
 race1, race2, race3, race4, race5 = False, False, False, False, False
+pause = True
 current_race = 1
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, 1200)
@@ -813,20 +870,34 @@ while True:
                 if back_button_selected_rect.collidepoint(mouse_pos):
                     racing, home_screen = False, True
                     race1, race2, race3, race4, race5 = False, False, False, False, False
-                if races_circle_rect1.collidepoint(mouse_pos) and current_race == 1:
+                elif races_circle_rect1.collidepoint(mouse_pos) and current_race == 1:
                     stickman_right_rect.x = 100
                     stickman_right_rect.y = 500
                     stickman_running_surf = stickman_right
+
+                    opp1_idle_rect.topleft = (100, 480)
+                    opp2_idle_rect.topleft = (100, 460)
+                    opp3_idle_rect.topleft = (100, 440)
+                    opp1_pos = opp1_idle_rect.x
+                    opp2_pos = opp2_idle_rect.x
+                    opp3_pos = opp3_idle_rect.x
+                    opp1_surf = opp1_idle
+                    opp2_surf = opp2_idle
+                    opp3_surf = opp3_idle
+
                     race1 = True
                     start_time = pygame.time.get_ticks()
-                if races_circle_rect2.collidepoint(mouse_pos) and current_race == 2:
+                elif races_circle_rect2.collidepoint(mouse_pos) and current_race == 2:
                     race2 = True
-                if races_circle_rect3.collidepoint(mouse_pos) and current_race == 3:
+                elif races_circle_rect3.collidepoint(mouse_pos) and current_race == 3:
                     race3 = True
-                if races_circle_rect4.collidepoint(mouse_pos) and current_race == 4:
+                elif races_circle_rect4.collidepoint(mouse_pos) and current_race == 4:
                     race4 = True
-                if races_circle_rect5.collidepoint(mouse_pos) and current_race == 5:
+                elif races_circle_rect5.collidepoint(mouse_pos) and current_race == 5:
                     race5 = True
+                elif skip_text_selected_rect.collidepoint(mouse_pos):
+                    countdown = 23
+
         if event.type == pygame.MOUSEBUTTONUP:
             if stickman_pickup:
                 stickman_pickup = False
@@ -1361,12 +1432,16 @@ while True:
                 races_stickman_rect.x = 115
             elif current_race == 2:
                 races_stickman_rect.x = 238
+                races_stickman_rect.y = 268
             elif current_race == 3:
                 races_stickman_rect.x = 367
+                races_stickman_rect.y = 307
             elif current_race == 4:
                 races_stickman_rect.x = 480
+                races_stickman_rect.y = 220
             elif current_race == 5:
                 races_stickman_rect.x = 602
+                races_stickman_rect.y = 270
 
             screen.blit(races_stickman, races_stickman_rect)
 
@@ -1378,41 +1453,65 @@ while True:
                 screen.blit(hills_running, hills_running_rect)
                 screen.blit(hills_running2, hills_running2_rect)
                 screen.blit(ground, ground_rect)
+
+                screen.blit(opp3_surf, opp3_idle_rect)
+                screen.blit(opp2_surf, opp2_idle_rect)
+                screen.blit(opp1_surf, opp1_idle_rect)
                 screen.blit(stickman_running_surf, stickman_right_rect)
-                screen.blit(opp1_idle, opp1_idle_rect)
-                screen.blit(opp2_idle, opp2_idle_rect)
-                screen.blit(opp3_idle, opp3_idle_rect)
-
-                energy_text = stickman_font.render(
+                racing_energy_text = stickman_font.render(
                     f"energy: {int(energy)}", True, 'black')
-                energy_text = pygame.transform.rotozoom(
-                    energy_text, 0, .35)
+                racing_energy_text = pygame.transform.rotozoom(
+                    racing_energy_text, 0, .35)
 
-                energy_text_rect = energy_text.get_rect(
-                    topleft=(710, 650))
-                screen.blit(energy_text, energy_text_rect)
+                racing_energy_text_rect = racing_energy_text.get_rect(
+                    topleft=(750, 650))
+                screen.blit(racing_energy_text, racing_energy_text_rect)
+
+                if energy <= 0:
+                    screen.blit(skip_text, skip_text_rect)
+                    if skip_text_rect.collidepoint(mouse_pos):
+                        screen.blit(skip_text_selected,
+                                    skip_text_selected_rect)
+
                 if countdown > 3:
-
+                    opp_racing_animation()
                     if energy > 0:
                         energy -= .05
 
                     if countdown <= 15:
+                        if countdown <= 13:
+                            opp1_pos += .1
+                            opp2_pos += .5
+                            opp3_pos += .8
+                            opp1_idle_rect.x = opp1_pos
+                            opp2_idle_rect.x = opp2_pos
+                            opp3_idle_rect.x = opp3_pos
 
                         racing_banner_rect.x = 1000
                         racing_banner_rect.y = 550
                         if energy > 0:
                             running_animation()
                         else:
+                            stickman_running_surf = pygame.transform.rotate(
+                                stickman_right, 270)
+                            stickman_right_rect.y = 600
                             stickman_right_rect.x -= 2
                     if racing_banner_rect.x > 770:
 
-                        if countdown > 13 and energy > 0:
-                            stickman_right_rect.x += 2
+                        if countdown > 13:
+                            opp1_idle_rect.x += 1.4
+                            opp2_idle_rect.x += 2
+                            opp3_idle_rect.x += 2.5
+                            if energy > 0:
+                                stickman_right_rect.x += 2
                         if countdown > 15:
                             if energy > 0:
                                 running_animation()
                             else:
+                                stickman_running_surf = pygame.transform.rotate(
+                                    stickman_right, 90)
                                 stickman_right_rect.x -= 2
+
                             racing_banner_rect.x -= 3
                             screen.blit(racing_banner, racing_banner_rect)
 
@@ -1425,12 +1524,14 @@ while True:
                     else:
                         screen.blit(racing_banner, racing_banner_rect)
                         if countdown > 22:
+
                             energy = max_energy
                             screen.fill('white')
                             if stickman_right_rect.x > 770:
                                 screen.blit(races_win, races_win_rect)
                                 current_race = 2
                             else:
+
                                 screen.blit(races_lose, races_lose_rect)
                             screen.blit(back_button, back_button_rect)
                             racing_banner_rect.center = (750, 460)
@@ -1441,11 +1542,8 @@ while True:
                                             back_button_selected_rect)
                         else:
                             if energy > 0:
-                                running_animation()
                                 stickman_right_rect.x += 2
-                            else:
-                                stickman_right_rect.x -= 2
-
+                                stickman_animation()
                 else:
                     if countdown == 3:
                         countdown_text = stickman_font.render(
